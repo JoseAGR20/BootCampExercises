@@ -32,7 +32,7 @@ for (let char of str) {
 //In all 3 of these scenarios we are "reducing" values
 /*whatever is returned from the callback function, 
 becomes the new value of the accumulator. 
--Accepts a callback function adn an optional 
+-Accepts a callback function and an optional 
 second parameter.
 -Iterates through an array.
 -Runs a callback on each value in the array.
@@ -47,7 +47,7 @@ example: */
 let evens = [2, 4, 6, 8, 10];
 
 evens,reduce(function(accumulator, nextValue){
-    return accumu lartor + nextValue;
+    return accumu accumulator + nextValue;
 });
 /*
 2
@@ -119,5 +119,49 @@ the number of times the vowel appears in the string.
 This function should be case insensitive so a lowercase letter and 
 uppercase letter should count*/
 
-function vowelCount(str )
+function vowelCount(str){
+    const vowels = "aeiou";
+    return str.split('').reduce(function(acc,next){
+        let lowerCased = next.toLowerCase()
+        if(vowels.indexOf(lowerCased) !== -1){
+            if(acc[lowerCased]){
+                acc[lowerCased]++;
+            } else {
+                acc[lowerCased] = 1;
+            }
+        }
+        return acc;
+    }, {});
+}
+
+/*addKeyAndValue
+
+Write a function called addKeyAndValue which accepts an array of 
+objects and returns the array of objects passed to it with each 
+object now including the key and value passed to the function.*/
+
+function ddKeyAndValue(arr, key, value) {
+    return arr.reduce(function(acc, next, idx) {
+        acc[idx][key] = value;
+        return acc;
+    }, arr);
+}
+
+/*Write a function called partition which accepts an array 
+and a callback and returns an array with two arrays inside of it. 
+The partition function should run the callback function on each 
+value in the array and if the result of the callback function at 
+that specific value is true, the value should be placed in the 
+first subarray. If the result of the callback function at that 
+specific value is false, the value should be placed in the second 
+subarray. */
+ function partion(arr, fn,) {
+    return arr.reduce(function(acc, next) {
+        if(fn(next)) {
+            acc[0].push(next);
+        } else {
+            acc[1].push(next);
+        }
+    }, [[], []]);
+ }
 
